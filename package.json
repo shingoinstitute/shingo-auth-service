@@ -1,0 +1,27 @@
+{
+  "name": "shingo-auth-service",
+  "version": "1.0.0-beta",
+  "description": "Provides a high-level programmatic interface for the Shingo RPC auth api",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && cp src/*.proto dist",
+    "clean": "rm -rf dist && rm -rf docs",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "rm -rf docs && mkdir docs && typedoc --out docs --target ES5 --module commonjs --excludeExternals --tsconfig ./tsconfig.json --excludePrivate --excludeNotExported src"
+  },
+  "author": "Abraham White <abelincoln.white@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bluebird": "^3.5.20",
+    "alsatian": "^2.1.0",
+    "nyc": "^11.4.1",
+    "type-zoo": "^1.1.1",
+    "typedoc": "^0.9.0",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "grpc": "^1.8.4"
+  }
+}
