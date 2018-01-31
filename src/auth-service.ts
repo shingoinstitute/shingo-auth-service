@@ -20,7 +20,7 @@ export class AuthService {
     /**
      * Get an list of users using a TypeORM query
      *
-     * @param clause - A TypeORM query. See [here]{@link https://typeorm.io/#/select-query-builder} for docs
+     * @param clause - A TypeORM query. See [here](http://typeorm.io/#/select-query-builder) for documentation
      * @returns A list of users
      */
     public getUsers(clause: string): Promise<UserBatch> {
@@ -30,7 +30,7 @@ export class AuthService {
     /**
      * Get a single user using a TypeORM query
      *
-     * @param clause - A TypeORM query. See [here]{@link https://typeorm.io/#/select-query-builder} for docs
+     * @param clause - A TypeORM query. See [here](http://typeorm.io/#/select-query-builder) for documentation
      * @returns The user
      */
     public getUser(clause: string): Promise<User> {
@@ -58,7 +58,7 @@ export class AuthService {
      * @param user - A user object. Properties: one of [id, extId] and one or more of [email, password, services]
      * @returns A boolean response
      */
-    public updateUser(user: Partial<User> & ({id: number} | {extId: string})): Promise<BooleanResponse> {
+    public updateUser(user: Partial<User> & (Pick<User, 'id'> | Pick<User, 'extId'>)): Promise<BooleanResponse> {
         return this.client.updateUserAsync(user);
     }
 
@@ -68,7 +68,7 @@ export class AuthService {
      * @param user - User object to delete. Properties: one of [id, extId]
      * @returns A boolean response
      */
-    public deleteUser(user: {id: number} | {extId: string}): Promise<BooleanResponse> {
+    public deleteUser(user: Pick<User, 'id'> | Pick<User, 'extId'>): Promise<BooleanResponse> {
         return this.client.deleteUserAsync(user);
     }
 
@@ -97,7 +97,7 @@ export class AuthService {
     /**
      * Get a list of permissions using a TypeORM query
      *
-     * @param clause - A TypeORM query. See [here]{@link https://typeorm.io/#/select-query-builder} for docs
+     * @param clause - A TypeORM query. See [here](http://typeorm.io/#/select-query-builder) for documentation
      * @returns The list of permissions
      */
     public getPermissions(clause: string): Promise<Permission[]> {
@@ -107,7 +107,7 @@ export class AuthService {
     /**
      * Get a single permission using a TypeORM query
      *
-     * @param clause - A TypeORM query. See [here]{@link https://typeorm.io/#/select-query-builder} for docs
+     * @param clause - A TypeORM query. See [here](http://typeorm.io/#/select-query-builder) for documentation
      * @returns The permission
      */
     public getPermission(clause: string): Promise<Permission> {
@@ -120,7 +120,7 @@ export class AuthService {
      * @param permission - Permission to be created
      * @returns The created permission
      */
-    public createPermission(permission: Omit<Permission, 'id'>): Promise<Permission> {
+    public createPermission(permission: Omit<Permission, 'id'|'roles'|'users'>): Promise<Permission> {
         return this.client.createPermissionAsync(permission);
     }
 
@@ -130,7 +130,7 @@ export class AuthService {
      * @param permission - Permission to update
      * @returns A boolean response
      */
-    public updatePermission(permission: Partial<Permission> & { 'id': number }): Promise<BooleanResponse> {
+    public updatePermission(permission: Partial<Permission> & Pick<Permission, 'id'>): Promise<BooleanResponse> {
         return this.client.updatePermissionAsync(permission);
     }
 
@@ -148,7 +148,7 @@ export class AuthService {
     /**
      * Get a list of roles based on a TypeORM query
      *
-     * @param clause - A TypeORM query. See [here]{@link https://typeorm.io/#/select-query-builder} for docs
+     * @param clause - A TypeORM query. See [here](http://typeorm.io/#/select-query-builder) for documentation
      * @returns A list of roles
      */
     public getRoles(clause: string): Promise<RoleBatch> {
@@ -158,7 +158,7 @@ export class AuthService {
     /**
      * Get a single role based on a TypeORM query
      *
-     * @param clause - A TypeORM query. See [here]{@link https://typeorm.io/#/select-query-builder} for docs
+     * @param clause - A TypeORM query. See [here](http://typeorm.io/#/select-query-builder) for documentation
      * @returns The role
      */
     public getRole(clause: string): Promise<Role> {
@@ -171,7 +171,7 @@ export class AuthService {
      * @param role - Role to create
      * @returns The role
      */
-    public createRole(role: Omit<Role, 'id'>): Promise<Role> {
+    public createRole(role: Omit<Role, 'id'|'permissions'|'users'>): Promise<Role> {
         return this.client.createRoleAsync(role);
     }
 
@@ -188,10 +188,10 @@ export class AuthService {
     /**
      * Delete a role
      *
-     * @param role - Id of role to delete
+     * @param role - Role object to delete
      * @returns A boolean response
      */
-    public deleteRole(role: {id: number}): Promise<BooleanResponse> {
+    public deleteRole(role: Pick<Role, 'id'>): Promise<BooleanResponse> {
         return this.client.deleteRoleAsync(role);
     }
 

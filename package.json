@@ -1,5 +1,5 @@
 {
-  "name": "shingo-auth-service",
+  "name": "@shingo/auth-service",
   "version": "1.0.0-beta",
   "description": "Provides a high-level programmatic interface for the Shingo RPC auth api",
   "main": "dist/index.js",
@@ -9,6 +9,10 @@
     "clean": "rm -rf dist && rm -rf docs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "rm -rf docs && mkdir docs && typedoc --out docs --target ES5 --module commonjs --excludeExternals --tsconfig ./tsconfig.json --excludePrivate --excludeNotExported src"
+  },
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/shingoinstitute/shingo-auth-service.git"
   },
   "author": "Abraham White <abelincoln.white@gmail.com>",
   "license": "MIT",
